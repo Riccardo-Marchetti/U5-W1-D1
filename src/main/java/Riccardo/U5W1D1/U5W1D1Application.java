@@ -17,9 +17,7 @@ public class U5W1D1Application {
 
 		Menu menu = ctx.getBean(Menu.class);
 		System.out.println("MENU");
-		for (OggettiDelMenu oggetti : menu.getOggettiDelMenu()){
-			System.out.println(oggetti.getNome() + ": (" + oggetti.getInformazioni() + ") - Calorie: " +  oggetti.getCalorie() + " - Prezzo: " + oggetti.getPrezzo() + "€");
-		}
+		menu.getOggettiDelMenu().forEach(a -> System.out.println(a.getNome() + ": (" + a.getInformazioni() + ") - Calorie: " +  a.getCalorie() + " - Prezzo: " + a.getPrezzo() + "€"));
 	}
 
 }
