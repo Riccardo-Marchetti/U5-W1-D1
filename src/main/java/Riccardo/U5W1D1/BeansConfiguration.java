@@ -1,9 +1,9 @@
 package Riccardo.U5W1D1;
 
 import Riccardo.U5W1D1.entities.*;
+import Riccardo.U5W1D1.enums.Stato;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -67,7 +67,7 @@ public class BeansConfiguration {
     public Drinks birra(){
         return new Drinks("Birra", 4.50, 120, "0,33 l");
     }
-    @Bean
+    @Bean ("ListaPizze")
     public List<Pizze> listaPizze(){
         List<Pizze> listaPizze = new ArrayList<>();
         listaPizze.add(pizzaMargherita());
@@ -75,7 +75,7 @@ public class BeansConfiguration {
         listaPizze.add(pizzaSalamino());
         return listaPizze;
     }
-    @Bean
+    @Bean ("ListaToppings")
     public List<Toppings> listaToppings(){
         List<Toppings> listaToppings = new ArrayList<>();
         listaToppings.add(prosciutto());
@@ -84,7 +84,7 @@ public class BeansConfiguration {
         listaToppings.add(salsaDiPomodoro());
         return listaToppings;
     }
-    @Bean
+    @Bean ("ListaDrinks")
     public List<Drinks> listaDrinks(){
         List<Drinks> listaDrinks = new ArrayList<>();
         listaDrinks.add(acqua());
@@ -92,20 +92,38 @@ public class BeansConfiguration {
         listaDrinks.add(birra());
         return listaDrinks;
     }
-    @Bean
-    public List<OggettiDelMenu> oggettiDelMenu(){
+    @Bean ("Menu")
+    public Menu menu(){
         List<Pizze> pizze = listaPizze();
         List<Toppings> condimenti = listaToppings();
         List<Drinks> drinks = listaDrinks();
-        List<OggettiDelMenu> oggettiDelMenu = new ArrayList<>();
-        oggettiDelMenu.addAll(pizze);
-        oggettiDelMenu.addAll(condimenti);
-        oggettiDelMenu.addAll(drinks);
-        return oggettiDelMenu;
+        return new Menu(pizze, drinks, condimenti);
     }
-    @Bean
-    public Menu menu(){
-        List<OggettiDelMenu> oggettiDelMenu = oggettiDelMenu();
-        return new Menu(oggettiDelMenu);
+
+    @Bean ("Tavolo1")
+    public Tavolo tavolo1(){
+        return new Tavolo(1, 4, Stato.LIBERO);
     }
+    @Bean ("Tavolo2")
+    public Tavolo tavolo2(){
+        return new Tavolo(2, 2, Stato.LIBERO);
+    }
+    @Bean ("Tavolo3")
+    public Tavolo tavolo3(){
+        return new Tavolo(3, 6, Stato.LIBERO);
+    }
+    @Bean ("Tavolo4")
+    public Tavolo tavolo4(){
+        return new Tavolo(4, 3, Stato.LIBERO);
+    }
+    @Bean ("ListaTavoli")
+    public List<Tavolo> listaTavoli(){
+        List<Tavolo> listaTavoli = new ArrayList<>();
+        listaTavoli.add(tavolo1());
+        listaTavoli.add(tavolo2());
+        listaTavoli.add(tavolo3());
+        listaTavoli.add(tavolo4());
+        return listaTavoli;
+    }
+
 }
